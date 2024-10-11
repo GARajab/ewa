@@ -5,6 +5,7 @@ body {
   padding: 20px;
   box-sizing: border-box;
   min-width: 540px;
+  height: 100vh;
 }
 
 .titleAndInst {
@@ -115,7 +116,7 @@ h6{
 }
 
 #resetFullGame,
-#startGame {
+#startGame, #submitBtm {
   width: 100px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -129,6 +130,30 @@ h6{
 /* Optional: Keep the buttons side by side with added horizontal space */
 .btn + .btn {
   border-left: 1px solid white; /* Add a separator between buttons */
+}
+
+
+#submitBtnDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+
+}
+
+#submitBtm{
+  background-color: #128496;
+  /*Bootstrapprimarycolor*/color: white;
+  /*border: none;
+  */padding: 10px;
+  margin: 0;
+  cursor: pointer;
+  width: 300px;
+  -webkit-border-radius:;
+  -moz-border-radius:;
+  -ms-border-radius:;
+  -o-border-radius:;
+  
 }
 
 /* Responsive Design */

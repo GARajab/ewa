@@ -1,20 +1,4 @@
-// const
-// const imgPlyr0 = document.getElementById("plrImg0")
-// const imgPlyr1 = document.getElementById("plrImg1")
-// const imgPlyr2 = document.getElementById("plrImg2")
-// const imgPlyr3 = document.getElementById("plrImg3")
-// const imgPlyr4 = document.getElementById("plrImg4")
-// const imgPlyr5 = document.getElementById("plrImg5")
-
-const imgPc0 = document.getElementById("compImg0")
-const imgPc1 = document.getElementById("compImg1")
-const imgPc2 = document.getElementById("compImg2")
-const imgPc3 = document.getElementById("compImg3")
-const imgPc4 = document.getElementById("compImg4")
-const imgPc5 = document.getElementById("compImg5")
-
 //? variable
-let pcArrwosRandomByMath = []
 // ! all arrows are up (player)
 let playerArrowsDirections = []
 let initArray = [0, 0, 0, 0, 0, 0]
@@ -138,7 +122,7 @@ const images = [
 
 let currentIndices = Array(6).fill(0) // Initialize current indices for each image
 
-const changeImage = (index) => {
+const changeImageOfPlayer = (index) => {
   currentIndices[index] = (currentIndices[index] + 1) % images.length // Increment index and wrap around
   const img = document.getElementById(`plrImg${index}`)
   img.src = images[currentIndices[index]] // Change the src of the image
@@ -149,30 +133,56 @@ const changeImage = (index) => {
 // Add event listeners for each button
 for (let i = 0; i < 6; i++) {
   const button = document.getElementById(`L${i}`)
-  button.addEventListener("click", () => changeImage(i))
+  button.addEventListener("click", () => changeImageOfPlayer(i))
 }
+const changeImgForPC = () => {
+  function generateRandomArray() {
+    const result = []
+    while (result.length < 6) {
+      // Generate a random number between 0 and 3
+      const randomNumber = Math.floor(Math.random() * 4) // 0 to 3
+      // Add the random number to the result array
+      // Ensure we don't add the same number twice
 
-const fillPlayerTriesArray = () => {}
-// working 100% for player cards
-const initializeGame = () => {
-  //   resetPcArrows()
-  resetPlayerArrows()
-  currentIndex = 0
-  let pcArrwosRandomByMath = []
-}
-const fillPcArrowsRandomly = () => {
-  for (let i = 0; i < 6; i++) {
-    pcArrwosRandomByMath.push(Math.floor(Math.random() * 3))
+      result.push(randomNumber)
+    }
+    return result
   }
 
-  console.log(pcArrwosRandomByMath)
+  const randomArray = generateRandomArray()
+  console.log(randomArray)
+
+  randomArray.forEach((randNum, index) => {
+    const img = document.getElementById(`compImg${index}`)
+    if (img) {
+      img.src = images[randNum] // Change the src of the image
+    } else {
+      console.error(`Image element with id 'compImg${index}' not found.`)
+    }
+  })
 }
+
+// working 100% for player cards
+const initializeGame = () => {
+  resetPlayerArrows()
+  currentIndex = 0
+  startBtn.textContent = "Start"
+  startBtn.disabled = false
+  startBtn.style.width = "150px"
+}
+// Function to generate an array with 5 random indices filled with random numbers from 0 to 3
+
+// Generate the array
+// const randomArray = generateRandomArray();
+// console.log(randomArray);
 const startGame = () => {
-  console.dir(pcArrows)
   pcArrows.forEach((pcArrow) => {
     pcArrow.classList.remove("hide-img")
   })
-  fillPcArrowsRandomly()
+  changeImgForPC()
+  startBtn.disabled = true
+  startBtn.textContent = "Started..."
+  startBtn.style.width = "200px"
 }
 
 const resetPlayerArrows = () => {
