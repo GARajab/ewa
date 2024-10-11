@@ -1,28 +1,29 @@
 // const
-const imgPlyr0 = document.getElementById("imgID0")
-const imgPlyr1 = document.getElementById("imgID1")
-const imgPlyr2 = document.getElementById("imgID2")
-const imgPlyr3 = document.getElementById("imgID3")
-const imgPlyr4 = document.getElementById("imgID4")
-const imgPlyr5 = document.getElementById("imgID5")
-// variable
+const imgPlyr0 = document.getElementById("plrImg0")
+const imgPlyr1 = document.getElementById("plrImg1")
+const imgPlyr2 = document.getElementById("plrImg2")
+const imgPlyr3 = document.getElementById("plrImg3")
+const imgPlyr4 = document.getElementById("plrImg4")
+const imgPlyr5 = document.getElementById("plrImg5")
+
+const imgPc0 = document.getElementById(".compImg0")
+const imgPc1 = document.getElementById(".compImg1")
+const imgPc2 = document.getElementById(".compImg2")
+const imgPc3 = document.getElementById(".compImg3")
+const imgPc4 = document.getElementById(".compImg4")
+const imgPc5 = document.getElementById(".compImg5")
+
+//? variable
 let pcArrwosRandomByMath = []
+// ! all arrows are up (player)
 let playerArrowsDirections = []
+let initArray = [0, 0, 0, 0, 0, 0]
 let array = new Array(7).fill(null) // Create an array of length 7 filled with null values
 
-// functions
-function changeImage(direction) {
-  // Update the index based on the direction
-  if (direction === "imgUp" || direction === "imgLeft") {
-    currentIndex = (currentIndex - 1 + images.length) % images.length
-  } else if (direction === "imgDown" || direction === "imgRight") {
-    currentIndex = (currentIndex + 1) % images.length
-  }
-  imgPlyr0.src = images[currentIndex]
-  // Update the image source for each image element
-  // playerArrowsImgs.forEach((img) => {
-  //   img.src = images[currentIndex] // Update individual image source
-  // })
+//? functions
+function changeImage(playerVal, playerImg) {
+  currentIndex = (currentIndex - 1 + images.length) % images.length
+  playerImg.src = images[currentIndex]
 }
 const images = [
   "/images/0.png",
@@ -32,33 +33,89 @@ const images = [
 ]
 
 // Current index
-let currentIndex = 0
-
-const leftOrRight = () => {
-  // playerArrowsImgs.forEach((playerArrowsImg, index) => {
-  //   let imgsValue = playerArrowsImg.getAttribute("value")
-  //   // Append new contents
-  //   playerArrowsDirections.push(imgsValue)
-  //   playerArrowsDirections.length = index + 1
-  // })
-
-  const filling = () => {
-    let newElements = playerArrowsDirections // Replace with your actual new elements
-
-    fillArray(newElements)
-  }
-  filling()
-
-  const LzeroVal = imgPlyr0.getAttribute("value")
-  console.log(LzeroVal)
-
-  changeImage(LzeroVal)
-  console.log(images[currentIndex])
+currentIndex = 0
+const filling = () => {
+  let newElements = playerArrowsDirections // Replace with your actual new elements
+  fillArray(newElements)
 }
-
 const fillArray = (newElements) => {
   array.splice(0, 7, ...newElements) // Replace the first 7 elements with the new elements
-  console.log(array)
+  // console.log(array)
+}
+const changePlayerArrowsDirectionsZero = () => {
+  filling()
+  const lZeroVal = imgPlyr0.getAttribute("value")
+  // playerArrowsDirections.unshift(currentIndex)
+  if (playerArrowsDirections.length > 0) {
+    playerArrowsDirections[0] = currentIndex
+  } else {
+    playerArrowsDirections.push(currentIndex)
+  }
+  console.log(playerArrowsDirections)
+
+  changeImage(lZeroVal, imgPlyr0)
+  // console.log(images[currentIndex])
+}
+const changePlayerArrowsDirectionsOne = () => {
+  filling()
+  const lOneVal = imgPlyr1.getAttribute("value")
+  if (playerArrowsDirections.length > 1) {
+    playerArrowsDirections[1] = currentIndex
+  } else {
+    playerArrowsDirections.push(currentIndex)
+  }
+  console.log(playerArrowsDirections)
+  changeImage(lOneVal, imgPlyr1)
+  // console.log(images[currentIndex])
+}
+const changePlayerArrowsDirectionsTwo = () => {
+  filling()
+
+  const lTwoVal = imgPlyr2.getAttribute("value")
+  if (playerArrowsDirections.length > 2) {
+    playerArrowsDirections[2] = currentIndex
+  } else {
+    playerArrowsDirections.push(currentIndex)
+  }
+  console.log(playerArrowsDirections)
+  changeImage(lTwoVal, imgPlyr2)
+  // console.log(images[currentIndex])
+}
+const changePlayerArrowsDirectionsThree = () => {
+  filling()
+  const lThreeVal = imgPlyr3.getAttribute("value")
+  if (playerArrowsDirections.length > 3) {
+    playerArrowsDirections[3] = currentIndex
+  } else {
+    playerArrowsDirections.push(currentIndex)
+  }
+  console.log(playerArrowsDirections)
+  changeImage(lThreeVal, imgPlyr3)
+  // console.log(images[currentIndex])
+}
+const changePlayerArrowsDirectionsFour = () => {
+  filling()
+  const lFourVal = imgPlyr4.getAttribute("value")
+  if (playerArrowsDirections.length > 4) {
+    playerArrowsDirections[4] = currentIndex
+  } else {
+    playerArrowsDirections.push(currentIndex)
+  }
+  console.log(playerArrowsDirections)
+  changeImage(lFourVal, imgPlyr4)
+  // console.log(images[currentIndex])
+}
+const changePlayerArrowsDirectionsFive = () => {
+  filling()
+  const lFiveVal = imgPlyr5.getAttribute("value")
+  if (playerArrowsDirections.length > 5) {
+    playerArrowsDirections[5] = currentIndex
+  } else {
+    playerArrowsDirections.push(currentIndex)
+  }
+  console.log(playerArrowsDirections)
+  changeImage(lFiveVal, imgPlyr5)
+  // console.log(images[currentIndex])
 }
 
 const fillPlayerTriesArray = () => {}
@@ -66,6 +123,7 @@ const fillPlayerTriesArray = () => {}
 const initializeGame = () => {
   //   resetPcArrows()
   resetPlayerArrows()
+  currentIndex = 0
   let pcArrwosRandomByMath = []
 }
 const fillPcArrowsRandomly = () => {
@@ -92,7 +150,7 @@ const resetPlayerArrows = () => {
   })
 }
 
-// cashing
+//? cashing
 
 // full 12 btn cashing
 const buttons = document.querySelectorAll(".btn")
@@ -115,33 +173,33 @@ startBtn.addEventListener("click", startGame)
 rstButton.addEventListener("click", initializeGame)
 // full 12 btn click event
 // buttons.forEach((button) => {
-//   button.addEventListener("click", leftOrRight)
+//   button.addEventListener("click", changePlayerArrowsDirections)
 // })
-// full 12 btn seperate cashing
-const Lzero = document.getElementById("L0")
-Lzero.addEventListener("click", leftOrRight)
-const Rzero = document.getElementById("R0")
-Rzero.addEventListener("click", leftOrRight)
-const Lone = document.getElementById("L1")
-Lone.addEventListener("click", leftOrRight)
-const Rone = document.getElementById("R1")
-Rone.addEventListener("click", leftOrRight)
-const Ltwo = document.getElementById("L2")
-Ltwo.addEventListener("click", leftOrRight)
-const Rtwo = document.getElementById("R2")
-Rtwo.addEventListener("click", leftOrRight)
-const Lthree = document.getElementById("L3")
-Lthree.addEventListener("click", leftOrRight)
-const Rthree = document.getElementById("R3")
-Rthree.addEventListener("click", leftOrRight)
-const Lfour = document.getElementById("L4")
-Lfour.addEventListener("click", leftOrRight)
-const Rfour = document.getElementById("R4")
-Rfour.addEventListener("click", leftOrRight)
-const Lfive = document.getElementById("L5")
-Lfive.addEventListener("click", leftOrRight)
-const Rfive = document.getElementById("R5")
-Rfive.addEventListener("click", leftOrRight)
+//? full 12 btn seperate cashing and lisiting
+const lZero = document.getElementById("L0")
+lZero.addEventListener("click", changePlayerArrowsDirectionsZero)
+// const Rzero = document.getElementById("R0")
+// Rzero.addEventListener("click", changePlayerArrowsDirections)
+const lOne = document.getElementById("L1")
+lOne.addEventListener("click", changePlayerArrowsDirectionsOne)
+// const Rone = document.getElementById("R1")
+// Rone.addEventListener("click", changePlayerArrowsDirections)
+const lTwo = document.getElementById("L2")
+lTwo.addEventListener("click", changePlayerArrowsDirectionsTwo)
+// const Rtwo = document.getElementById("R2")
+// Rtwo.addEventListener("click", changePlayerArrowsDirections)
+const lThree = document.getElementById("L3")
+lThree.addEventListener("click", changePlayerArrowsDirectionsThree)
+// const Rthree = document.getElementById("R3")
+// Rthree.addEventListener("click", changePlayerArrowsDirections)
+const lFour = document.getElementById("L4")
+lFour.addEventListener("click", changePlayerArrowsDirectionsFour)
+// const Rfour = document.getElementById("R4")
+// Rfour.addEventListener("click", changePlayerArrowsDirections)
+const lFive = document.getElementById("L5")
+lFive.addEventListener("click", changePlayerArrowsDirectionsFive)
+// const Rfive = document.getElementById("R5")
+// Rfive.addEventListener("click", changePlayerArrowsDirections)
 
 // full 6 images to change there src
 
