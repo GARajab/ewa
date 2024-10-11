@@ -6,12 +6,12 @@ const imgPlyr3 = document.getElementById("plrImg3")
 const imgPlyr4 = document.getElementById("plrImg4")
 const imgPlyr5 = document.getElementById("plrImg5")
 
-const imgPc0 = document.getElementById(".compImg0")
-const imgPc1 = document.getElementById(".compImg1")
-const imgPc2 = document.getElementById(".compImg2")
-const imgPc3 = document.getElementById(".compImg3")
-const imgPc4 = document.getElementById(".compImg4")
-const imgPc5 = document.getElementById(".compImg5")
+const imgPc0 = document.getElementById("compImg0")
+const imgPc1 = document.getElementById("compImg1")
+const imgPc2 = document.getElementById("compImg2")
+const imgPc3 = document.getElementById("compImg3")
+const imgPc4 = document.getElementById("compImg4")
+const imgPc5 = document.getElementById("compImg5")
 
 //? variable
 let pcArrwosRandomByMath = []
@@ -33,7 +33,7 @@ const images = [
 ]
 
 // Current index
-currentIndex = 0
+let currentIndex = 0
 const filling = () => {
   let newElements = playerArrowsDirections // Replace with your actual new elements
   fillArray(newElements)
@@ -46,7 +46,7 @@ const changePlayerArrowsDirectionsZero = () => {
   filling()
   const lZeroVal = imgPlyr0.getAttribute("value")
 
-  if (playerArrowsDirections.length > 0) {
+  if (playerArrowsDirections.length <= 0) {
     playerArrowsDirections[0] = currentIndex
     if (playerArrowsDirections[0] === -1) {
       playerArrowsDirections[0] = 3
