@@ -22,7 +22,7 @@ let array = new Array(7).fill(null) // Create an array of length 7 filled with n
 
 //? functions
 function changeImage(playerVal, playerImg) {
-  currentIndex = (currentIndex - 1 + images.length) % images.length
+  currentIndex = (currentIndex + 1) % images.length
   playerImg.src = images[currentIndex]
 }
 const images = [
@@ -45,13 +45,15 @@ const fillArray = (newElements) => {
 const changePlayerArrowsDirectionsZero = () => {
   filling()
   const lZeroVal = imgPlyr0.getAttribute("value")
-  // playerArrowsDirections.unshift(currentIndex)
+
   if (playerArrowsDirections.length > 0) {
     playerArrowsDirections[0] = currentIndex
+    if (playerArrowsDirections[0] === -1) {
+      playerArrowsDirections[0] = 3
+    }
   } else {
     playerArrowsDirections.push(currentIndex)
   }
-  console.log(playerArrowsDirections)
 
   changeImage(lZeroVal, imgPlyr0)
   // console.log(images[currentIndex])
@@ -59,12 +61,16 @@ const changePlayerArrowsDirectionsZero = () => {
 const changePlayerArrowsDirectionsOne = () => {
   filling()
   const lOneVal = imgPlyr1.getAttribute("value")
+
   if (playerArrowsDirections.length > 1) {
     playerArrowsDirections[1] = currentIndex
+    if (playerArrowsDirections[1] === -1) {
+      playerArrowsDirections[1] = 3
+    }
   } else {
     playerArrowsDirections.push(currentIndex)
   }
-  console.log(playerArrowsDirections)
+
   changeImage(lOneVal, imgPlyr1)
   // console.log(images[currentIndex])
 }
@@ -74,10 +80,13 @@ const changePlayerArrowsDirectionsTwo = () => {
   const lTwoVal = imgPlyr2.getAttribute("value")
   if (playerArrowsDirections.length > 2) {
     playerArrowsDirections[2] = currentIndex
+    if (playerArrowsDirections[2] === -1) {
+      playerArrowsDirections[2] = 3
+    }
   } else {
     playerArrowsDirections.push(currentIndex)
   }
-  console.log(playerArrowsDirections)
+
   changeImage(lTwoVal, imgPlyr2)
   // console.log(images[currentIndex])
 }
@@ -86,10 +95,13 @@ const changePlayerArrowsDirectionsThree = () => {
   const lThreeVal = imgPlyr3.getAttribute("value")
   if (playerArrowsDirections.length > 3) {
     playerArrowsDirections[3] = currentIndex
+    if (playerArrowsDirections[3] === -1) {
+      playerArrowsDirections[3] = 3
+    }
   } else {
     playerArrowsDirections.push(currentIndex)
   }
-  console.log(playerArrowsDirections)
+
   changeImage(lThreeVal, imgPlyr3)
   // console.log(images[currentIndex])
 }
@@ -98,10 +110,13 @@ const changePlayerArrowsDirectionsFour = () => {
   const lFourVal = imgPlyr4.getAttribute("value")
   if (playerArrowsDirections.length > 4) {
     playerArrowsDirections[4] = currentIndex
+    if (playerArrowsDirections[4] === -1) {
+      playerArrowsDirections[4] = 3
+    }
   } else {
     playerArrowsDirections.push(currentIndex)
   }
-  console.log(playerArrowsDirections)
+
   changeImage(lFourVal, imgPlyr4)
   // console.log(images[currentIndex])
 }
@@ -110,12 +125,15 @@ const changePlayerArrowsDirectionsFive = () => {
   const lFiveVal = imgPlyr5.getAttribute("value")
   if (playerArrowsDirections.length > 5) {
     playerArrowsDirections[5] = currentIndex
+    if (playerArrowsDirections[5] === -1) {
+      playerArrowsDirections[5] = 3
+    }
   } else {
     playerArrowsDirections.push(currentIndex)
   }
-  console.log(playerArrowsDirections)
+
   changeImage(lFiveVal, imgPlyr5)
-  // console.log(images[currentIndex])
+  console.log(playerArrowsDirections)
 }
 
 const fillPlayerTriesArray = () => {}
