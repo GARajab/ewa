@@ -10,6 +10,7 @@ const images = [
   "/images/3.png",
 ]
 
+//? functions Start
 // Functions to change player arrow images
 const changeImageOfPlayer = (index) => {
   currentIndices[index] = (currentIndices[index] + 1) % images.length // Increment index and wrap around
@@ -88,26 +89,38 @@ const resetPlayerArrows = () => {
     pcArrow.classList.add("hide-img")
   })
 }
+let scoreCounter = 0
 const submitAllPlayerArrows = () => {
-  // Check if currentIndices is equal to randomArray
-  // const isWin =
-  // currentIndices.length === randomArray.length &&
-  // currentIndices.every((value, index) => value === randomArray[index])
   for (let i = 0; i < 6; i++) {
     if (currentIndices[i] === randomArray[i]) {
       const greenCard = document.getElementById(`cardID${i}`)
       greenCard.style.backgroundColor = "#69CD80FF"
+      scoreCounter++
     } else {
       const redCards = document.getElementById(`cardID${i}`)
       redCards.style.backgroundColor = "#C82333"
     }
   }
-  // if (isWin) {
-  //   console.log("Win")
-  // } else {
-  //   console.log("Try Again")
-  // }
+  scoreLabel.innerText = `Score is: ${scoreCounter}`
 }
+
+// function getScore() {
+//   return parseInt(localStorage.getItem("gameScore")) || 0
+// }
+
+// // Function to save the score to localStorage
+// function saveScore(score) {
+//   localStorage.setItem("gameScore", score)
+// }
+
+// // Function to display the score
+// function displayScore() {
+//   const scoreDisplay = document.getElementById("scoreDisplay")
+//   scoreDisplay.textContent = getScore()
+// }
+
+// // Initial display of the score
+// displayScore()
 
 //? cashing
 
@@ -123,6 +136,8 @@ const rstButton = document.getElementById("resetFullGame")
 const pcArrows = document.querySelectorAll(".pcImg0")
 // submit Burron Cshing
 const submitAction = document.getElementById("submitBtm")
+// score
+const scoreLabel = document.getElementById("scoreLabel")
 // events only (any Thing To Be Clicked Will Be Here)
 
 // start button
