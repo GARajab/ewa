@@ -143,16 +143,12 @@ h6{
 
 #submitBtm{
   background-color: #128496;
-  /*Bootstrapprimarycolor*/color: white;
-  /*border: none;
-  */padding: 10px;
+  color: white;
+  padding: 10px;
   margin: 0;
   cursor: pointer;
   width: 300px;
-  -webkit-border-radius:;
-  -moz-border-radius:;
-  -ms-border-radius:;
-  -o-border-radius:;
+
   
 }
 
