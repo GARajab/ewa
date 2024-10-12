@@ -15,8 +15,8 @@ body {
 
 .gameButtons{
   display: flex;
-  justify-content: center;
-  gap:100px
+  justify-content: space-between;
+  align-items: center;
 }
 
 h6{
