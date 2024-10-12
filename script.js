@@ -62,20 +62,26 @@ const startGame = () => {
   pcArrows.forEach((pcArrow) => {
     pcArrow.style.transition = "all 1s ease-in-out"
     pcArrow.classList.remove("hide-img")
-  })
-
-  setTimeout(() => {
-    pcArrows.forEach((pcArrow) => {
+    setTimeout(() => {
       pcArrow.style.transition = "all 1s ease-in-out"
       pcArrow.classList.add("hide-img")
-    })
-  }, 3000)
-
-  changeImgForPC() // Generate and show PC directions
+    }, 3000)
+  })
+  // Generate and show PC directions
+  changeImgForPC()
   startBtn.disabled = true
   startBtn.textContent = "Started..."
   startBtn.style.width = "200px"
-  // }, 1000)
+  let countDown = 10
+  const countDownTimer = () => {
+    countDown--
+    if (countDown >= 0) {
+      console.log(countDown)
+    } else {
+      clearInterval(gameTimer)
+    }
+  }
+  let gameTimer = setInterval(countDownTimer, 1000)
 }
 
 // Function to reset player arrows
