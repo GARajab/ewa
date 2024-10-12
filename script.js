@@ -86,15 +86,19 @@ const resetPlayerArrows = () => {
 }
 const submitAllPlayerArrows = () => {
   // Check if currentIndices is equal to randomArray
-  const isWin =
-    currentIndices.length === randomArray.length &&
-    currentIndices.every((value, index) => value === randomArray[index])
-
-  if (isWin) {
-    console.log("Win")
-  } else {
-    console.log("Try Again")
-  }
+  // const isWin =
+  // currentIndices.length === randomArray.length &&
+  // currentIndices.every((value, index) => value === randomArray[index])
+  currentIndices.forEach((currentIndice) => {
+    if (currentIndices[currentIndice] === randomArray[currentIndice]) {
+      document.cards.style.backgroundColor = "Green"
+    }
+  })
+  // if (isWin) {
+  //   console.log("Win")
+  // } else {
+  //   console.log("Try Again")
+  // }
 }
 
 //? cashing
