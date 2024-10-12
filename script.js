@@ -63,6 +63,14 @@ const startGame = () => {
     pcArrow.style.transition = "all 1s ease-in-out"
     pcArrow.classList.remove("hide-img")
   })
+
+  setTimeout(() => {
+    pcArrows.forEach((pcArrow) => {
+      pcArrow.style.transition = "all 1s ease-in-out"
+      pcArrow.classList.add("hide-img")
+    })
+  }, 3000)
+
   changeImgForPC() // Generate and show PC directions
   startBtn.disabled = true
   startBtn.textContent = "Started..."

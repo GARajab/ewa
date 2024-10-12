@@ -8,34 +8,32 @@ body {
   height: 100vh;
 }
 
-.titleAndInst {
-  text-align: center;
-  font-size: 40px;
-}
-
-.gameButtons{
+.gameButtons {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#scoreLabel{
-  display: flex;
-  background-color: #007bff;
-  color: white;
-  padding: 20px;
-  margin: 0;
-  cursor: pointer;
-  width: fit-content;
+#scoreLabel {
+  background-color: #22b3d0;
+  padding: 18.5px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
- 
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  height: 54px;
+  font-size: 20px;
+  width: fit-content;
 }
 
-h6{
+.titleAndInst {
+  text-align: center;
+  font-size: 40px;
+}
+h6 {
   margin-bottom: 20px;
 }
 
@@ -75,13 +73,13 @@ h6{
 }
 
 .pcImg0 img {
-   width: 200px;
-   height: auto;
-   transition: opacity 1s ease-in-out;
-   -webkit-transition: opacity 1s ease-in-out;
-   -moz-transition: opacity 1s ease-in-out;
-   -ms-transition: opacity 1s ease-in-out;
-   -o-transition: opacity 1s ease-in-out;
+  width: 200px;
+  height: auto;
+  transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
 }
 
 .pcImg0.hide-img img {
@@ -123,22 +121,25 @@ h6{
   cursor: pointer;
   flex: 1; /* Allow buttons to grow and fill the width */
 }
-#resetFullGame{
-  background-color: #C82333
+#resetFullGame {
+  background-color: #c82333;
+  font-weight: 500;
 }
-#startGame{
-   background-color: #28A745; /* Bootstrap primary color */
+#startGame {
+  background-color: #28a745; /* Bootstrap primary color */
   color: white;
   border: none;
-  padding: 10px 0; /* Adjust padding for vertical spacing; set horizontal padding to 0 in the next line */
+  padding: 10px 0; /* Adjust padding for vertical spacing*/
   margin: 0; /* Remove margins */
   border-radius: 0; /* Optionally, remove border radius to match edges */
   cursor: pointer;
-  flex: 1; /
+  flex: 1;
+  font-weight: 500;
 }
 
 #resetFullGame,
-#startGame, #submitBtm {
+#startGame,
+#submitBtm {
   width: 100px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -154,24 +155,21 @@ h6{
   border-left: 1px solid white; /* Add a separator between buttons */
 }
 
-
-#submitBtnDiv{
+#submitBtnDiv {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 100px;
-
 }
 
-#submitBtm{
+#submitBtm {
   background-color: #128496;
   color: white;
   padding: 10px;
   margin: 0;
   cursor: pointer;
   width: 300px;
-
-  
+  border: none;
 }
 
 /* Responsive Design */
