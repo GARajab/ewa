@@ -57,13 +57,16 @@ const initializeGame = () => {
 }
 // Start game function
 const startGame = () => {
+  // setTimeout(() => {
   pcArrows.forEach((pcArrow) => {
+    pcArrow.style.transition = "all 1s ease-in-out"
     pcArrow.classList.remove("hide-img")
   })
   changeImgForPC() // Generate and show PC directions
   startBtn.disabled = true
   startBtn.textContent = "Started..."
   startBtn.style.width = "200px"
+  // }, 1000)
 }
 
 // Function to reset player arrows
@@ -78,6 +81,7 @@ const resetPlayerArrows = () => {
       }
       card.classList.remove("hide-img")
     }, 1500) // Wait for 3 seconds before removing the class
+    card.style.backgroundColor = "white"
   })
 
   pcArrows.forEach((pcArrow) => {

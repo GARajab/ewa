@@ -59,9 +59,13 @@ h6{
 }
 
 .pcImg0 img {
-  width: 200px;
-  height: auto;
-  transition: opacity 0.3s ease-in-out;
+   width: 200px;
+   height: auto;
+   transition: opacity 1s ease-in-out;
+   -webkit-transition: opacity 1s ease-in-out;
+   -moz-transition: opacity 1s ease-in-out;
+   -ms-transition: opacity 1s ease-in-out;
+   -o-transition: opacity 1s ease-in-out;
 }
 
 .pcImg0.hide-img img {
@@ -74,11 +78,11 @@ h6{
 .card img {
   width: 200px;
   height: auto;
-  transition: opacity 0.5s ease-in-out;
-  -webkit-transition: opacity 0.5s ease-in-out;
-  -moz-transition: opacity 0.5s ease-in-out;
-  -ms-transition: opacity 0.5s ease-in-out;
-  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
 }
 
 /* Updated button-container styles */
