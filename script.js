@@ -71,12 +71,19 @@ const resetPlayerArrows = () => {
   currentIndices.fill(0) // Reset current indices
   cards.forEach((card) => {
     card.classList.add("hide-img")
+    setTimeout(() => {
+      for (let i = 0; i < 6; i++) {
+        const img = document.getElementById(`plrImg${i}`)
+        img.src = images[0]
+      }
+      card.classList.remove("hide-img")
+    }, 1500) // Wait for 3 seconds before removing the class
   })
+
   pcArrows.forEach((pcArrow) => {
     pcArrow.classList.add("hide-img")
   })
 }
-
 const submitAllPlayerArrows = () => {
   // Check if currentIndices is equal to randomArray
   const isWin =
