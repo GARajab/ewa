@@ -126,7 +126,6 @@ const changeImageOfPlayer = (index) => {
   currentIndices[index] = (currentIndices[index] + 1) % images.length // Increment index and wrap around
   const img = document.getElementById(`plrImg${index}`)
   img.src = images[currentIndices[index]] // Change the src of the image
-  console.log(index)
   console.log(currentIndices)
 }
 
