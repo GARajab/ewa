@@ -89,11 +89,14 @@ const submitAllPlayerArrows = () => {
   // const isWin =
   // currentIndices.length === randomArray.length &&
   // currentIndices.every((value, index) => value === randomArray[index])
-  currentIndices.forEach((currentIndice) => {
-    if (currentIndices[currentIndice] === randomArray[currentIndice]) {
-      document.cards.style.backgroundColor = "Green"
+  for (let i = 0; i < 6; i++) {
+    if (currentIndices[i] === randomArray[i]) {
+      const greenCard = document.getElementById(`cardID${i}`)
+      greenCard.style.backgroundColor = "Green"
+
+      // cards.style.backgroundColor = "green"
     }
-  })
+  }
   // if (isWin) {
   //   console.log("Win")
   // } else {

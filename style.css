@@ -103,7 +103,9 @@ h6{
   cursor: pointer;
   flex: 1; /* Allow buttons to grow and fill the width */
 }
-
+#resetFullGame{
+  background-color: #C82333
+}
 #startGame{
    background-color: #28A745; /* Bootstrap primary color */
   color: white;
