@@ -37,7 +37,6 @@ const generateRandomArray = () => {
 // Function to show the PC's arrows
 const changeImgForPC = () => {
   randomArray = generateRandomArray() // Store the generated random array
-
   randomArray.forEach((randNum, index) => {
     const img = document.getElementById(`compImg${index}`)
     if (img) {
@@ -47,6 +46,7 @@ const changeImgForPC = () => {
     }
   })
 }
+
 const initializeGame = () => {
   resetPlayerArrows()
   currentIndex = 0
@@ -62,21 +62,15 @@ const startGame = () => {
   pcArrows.forEach((pcArrow) => {
     pcArrow.style.transition = "all 1s ease-in-out"
     pcArrow.classList.remove("hide-img")
-    let countDown = 10
-    const countDownTimer = () => {
-      countDown--
-      if (countDown >= 0) {
-        console.log(countDown)
-      } else {
-        clearInterval(gameTimer)
-      }
-    }
-    let gameTimer = setInterval(countDownTimer, 1000)
+    let countDown = 3
+
+    let gameTimer = setInterval(countDownTimer, 3000)
     setTimeout(() => {
       pcArrow.style.transition = "all 1s ease-in-out"
       pcArrow.classList.add("hide-img")
     }, 3000)
   })
+
   // Generate and show PC directions
   changeImgForPC()
   startBtn.disabled = true
@@ -118,24 +112,6 @@ const submitAllPlayerArrows = () => {
   scoreLabel.innerText = `Score is: ${scoreCounter}`
 }
 
-// function getScore() {
-//   return parseInt(localStorage.getItem("gameScore")) || 0
-// }
-
-// // Function to save the score to localStorage
-// function saveScore(score) {
-//   localStorage.setItem("gameScore", score)
-// }
-
-// // Function to display the score
-// function displayScore() {
-//   const scoreDisplay = document.getElementById("scoreDisplay")
-//   scoreDisplay.textContent = getScore()
-// }
-
-// // Initial display of the score
-// displayScore()
-
 //? cashing
 
 // full 12 btn cashing
@@ -160,3 +136,5 @@ startBtn.addEventListener("click", startGame)
 rstButton.addEventListener("click", initializeGame)
 // submitBtn
 submitAction.addEventListener("click", submitAllPlayerArrows)
+
+//test
