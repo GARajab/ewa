@@ -62,6 +62,16 @@ const startGame = () => {
   pcArrows.forEach((pcArrow) => {
     pcArrow.style.transition = "all 1s ease-in-out"
     pcArrow.classList.remove("hide-img")
+    let countDown = 10
+    const countDownTimer = () => {
+      countDown--
+      if (countDown >= 0) {
+        console.log(countDown)
+      } else {
+        clearInterval(gameTimer)
+      }
+    }
+    let gameTimer = setInterval(countDownTimer, 1000)
     setTimeout(() => {
       pcArrow.style.transition = "all 1s ease-in-out"
       pcArrow.classList.add("hide-img")
@@ -72,16 +82,6 @@ const startGame = () => {
   startBtn.disabled = true
   startBtn.textContent = "Started..."
   startBtn.style.width = "200px"
-  let countDown = 10
-  const countDownTimer = () => {
-    countDown--
-    if (countDown >= 0) {
-      console.log(countDown)
-    } else {
-      clearInterval(gameTimer)
-    }
-  }
-  let gameTimer = setInterval(countDownTimer, 1000)
 }
 
 // Function to reset player arrows
