@@ -18,11 +18,7 @@ const changeImageOfPlayer = (index) => {
   img.src = images[currentIndices[index]] // Change the src of the image
 }
 
-// Add event listeners for each button
-for (let i = 0; i < 6; i++) {
-  const button = document.getElementById(`L${i}`)
-  button.addEventListener("click", () => changeImageOfPlayer(i))
-}
+
 
 // Function to generate a random array
 const generateRandomArray = () => {
@@ -41,9 +37,7 @@ const changeImgForPC = () => {
     const img = document.getElementById(`compImg${index}`)
     if (img) {
       img.src = images[randNum] // Update the image source
-    } else {
-      console.error(`Image element with id 'compImg${index}' not found.`)
-    }
+    } 
   })
 }
 
@@ -136,5 +130,10 @@ startBtn.addEventListener("click", startGame)
 rstButton.addEventListener("click", initializeGame)
 // submitBtn
 submitAction.addEventListener("click", submitAllPlayerArrows)
+// Add event listeners for each button
+for (let i = 0; i < 6; i++) {
+  const button = document.getElementById(`L${i}`)
+  button.addEventListener("click", () => changeImageOfPlayer(i))
+}
 
 //test
