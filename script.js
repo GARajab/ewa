@@ -82,7 +82,7 @@ const timeOut = () => {
   let countdownInterval = setInterval(() => {
     if (countdownStart > 5) {
       countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
-    } else if (countdownStart > 2) {
+    } else if (countdownStart > 4) {
       countdownElement.style.backgroundColor = "#FFC105"
       countdownElement.style.color = "Black"
       countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
@@ -101,7 +101,8 @@ const timeOut = () => {
       } // Display message when time runs out
     }
 
-    countdownStart-- // Decrement the countdown after updating the message
+    countdownStart--
+    // scoreBonus()
   }, 1000) // Execute every 1000 milliseconds (1 second)
 }
 
@@ -176,3 +177,12 @@ for (let i = 0; i < 6; i++) {
 
 //test
 // whant timr control th inv mans at 10s scor will b 2*scor.....
+// const scoreBonus = () => {
+//   if (countdownStart > 5) {
+//     scoreCounter = scoreCounter * scoreCounter
+//   } else if (countdownStart > 4) {
+//     scoreCounter = scoreCounter * 2
+//   } else {
+//     return
+//   }
+// }
