@@ -18,8 +18,6 @@ const changeImageOfPlayer = (index) => {
   img.src = images[currentIndices[index]] // Change the src of the image
 }
 
-
-
 // Function to generate a random array
 const generateRandomArray = () => {
   const result = []
@@ -37,7 +35,7 @@ const changeImgForPC = () => {
     const img = document.getElementById(`compImg${index}`)
     if (img) {
       img.src = images[randNum] // Update the image source
-    } 
+    }
   })
 }
 
@@ -49,6 +47,12 @@ const initializeGame = () => {
   if (startBtn.textContent === "Start") {
     startBtn.style.width = "100px"
   }
+  countdownElement.textContent =
+    "Total Time After The Arrows Disappere is 10 Seconds 😎"
+  for (let i = 0; i < 6; i++) {
+    const button = document.getElementById(`L${i}`)
+    button.removeAttribute("disabled", "")
+  }
 }
 // Start game function
 const startGame = () => {
@@ -56,12 +60,10 @@ const startGame = () => {
   pcArrows.forEach((pcArrow) => {
     pcArrow.style.transition = "all 1s ease-in-out"
     pcArrow.classList.remove("hide-img")
-    let countDown = 3
-
-    let gameTimer = setInterval(countDownTimer, 3000)
     setTimeout(() => {
       pcArrow.style.transition = "all 1s ease-in-out"
       pcArrow.classList.add("hide-img")
+      timeOut()
     }, 3000)
   })
 
@@ -71,6 +73,40 @@ const startGame = () => {
   startBtn.textContent = "Started..."
   startBtn.style.width = "200px"
 }
+
+const timeOut = () => {
+  let countdownStart = 10 // Start the countdown from 10 seconds
+
+  const countdownElement = document.getElementById("countdown") // Assume there's an element with the id 'countdown'
+
+  let countdownInterval = setInterval(() => {
+    if (countdownStart > 5) {
+      countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
+    } else if (countdownStart > 2) {
+      countdownElement.style.backgroundColor = "#FFC105"
+      countdownElement.style.color = "Black"
+      countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
+    } else if (countdownStart > 0) {
+      countdownElement.style.color = "White"
+      countdownElement.style.backgroundColor = "#c82333"
+      countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
+    }
+
+    if (countdownStart === 0) {
+      clearInterval(countdownInterval)
+      countdownElement.textContent = "Time's Up!"
+      for (let i = 0; i < 6; i++) {
+        const button = document.getElementById(`L${i}`)
+        button.setAttribute("disabled", "")
+      } // Display message when time runs out
+    }
+
+    countdownStart-- // Decrement the countdown after updating the message
+  }, 1000) // Execute every 1000 milliseconds (1 second)
+}
+
+// To start the countdown, you can call the timeOut function:
+// timeOut();
 
 // Function to reset player arrows
 const resetPlayerArrows = () => {
@@ -122,6 +158,8 @@ const pcArrows = document.querySelectorAll(".pcImg0")
 const submitAction = document.getElementById("submitBtm")
 // score
 const scoreLabel = document.getElementById("scoreLabel")
+// timr
+const countdownElement = document.getElementById("countdown")
 // events only (any Thing To Be Clicked Will Be Here)
 
 // start button
@@ -137,3 +175,4 @@ for (let i = 0; i < 6; i++) {
 }
 
 //test
+// whant timr control th inv mans at 10s scor will b 2*scor.....

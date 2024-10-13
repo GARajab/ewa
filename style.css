@@ -29,6 +29,20 @@ body {
   width: fit-content;
 }
 
+#countdown {
+  font-size: 30px;
+  background-color: #28a745;
+  width: fit-content;
+  text-align: center;
+  color: #f4f4f4;
+  padding: 15.8px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
 .titleAndInst {
   text-align: center;
   font-size: 40px;
