@@ -194,3 +194,28 @@ h6 {
     align-items: center;
   }
 }
+
+.spinner {
+  max-width: 300px;
+  max-height: 300px;
+  transition: transform 1s;
+  -webkit-transition: transform 1s;
+  -moz-transition: transform 1s;
+  -ms-transition: transform 1s;
+  -o-transition: transform 1s;
+}
+
+.spin {
+  animation: spin 0.3s;
+  -webkit-animation: spin 0.3s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

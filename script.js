@@ -15,7 +15,8 @@ const images = [
 const changeImageOfPlayer = (index) => {
   currentIndices[index] = (currentIndices[index] + 1) % images.length // Increment index and wrap around
   const img = document.getElementById(`plrImg${index}`)
-  img.src = images[currentIndices[index]] // Change the src of the image
+  // Change the src of the image
+  img.src = images[currentIndices[index]]
 }
 
 // Function to generate a random array
@@ -36,12 +37,17 @@ const changeImgForPC = () => {
     if (img) {
       img.src = images[randNum] // Update the image source
     }
+    // Add spin class to animate
+    img.classList.add("spin")
+    // Remove spin class after animation is done
+    setTimeout(() => {
+      img.classList.remove("spin")
+    }, 1000) // Match this timeout with the duration of the spin CSS animation
   })
 }
 
 const initializeGame = () => {
   resetPlayerArrows()
-  currentIndex = 0
   startBtn.textContent = "Start"
   startBtn.disabled = false
   if (startBtn.textContent === "Start") {
@@ -53,6 +59,7 @@ const initializeGame = () => {
     const button = document.getElementById(`L${i}`)
     button.removeAttribute("disabled", "")
   }
+  submitAction.removeAttribute("disabled", "")
 }
 // Start game function
 const startGame = () => {
@@ -98,7 +105,8 @@ const timeOut = () => {
       for (let i = 0; i < 6; i++) {
         const button = document.getElementById(`L${i}`)
         button.setAttribute("disabled", "")
-      } // Display message when time runs out
+      }
+      submitAction.setAttribute("disabled", "")
     }
 
     countdownStart--
@@ -140,6 +148,7 @@ const submitAllPlayerArrows = () => {
       redCards.style.backgroundColor = "#C82333"
     }
   }
+  submitAction.setAttribute("disabled", "")
   scoreLabel.innerText = `Score is: ${scoreCounter}`
 }
 
@@ -161,6 +170,7 @@ const submitAction = document.getElementById("submitBtm")
 const scoreLabel = document.getElementById("scoreLabel")
 // timr
 const countdownElement = document.getElementById("countdown")
+
 // events only (any Thing To Be Clicked Will Be Here)
 
 // start button
@@ -174,15 +184,3 @@ for (let i = 0; i < 6; i++) {
   const button = document.getElementById(`L${i}`)
   button.addEventListener("click", () => changeImageOfPlayer(i))
 }
-
-//test
-// whant timr control th inv mans at 10s scor will b 2*scor.....
-// const scoreBonus = () => {
-//   if (countdownStart > 5) {
-//     scoreCounter = scoreCounter * scoreCounter
-//   } else if (countdownStart > 4) {
-//     scoreCounter = scoreCounter * 2
-//   } else {
-//     return
-//   }
-// }
