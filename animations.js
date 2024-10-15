@@ -1,4 +1,4 @@
-//? Confetto efficts
+//? Confetto effects
 // Globals
 var random = Math.random,
   cos = Math.cos,
@@ -7,7 +7,8 @@ var random = Math.random,
   PI2 = PI * 2,
   timer = undefined,
   frame = undefined,
-  confetti = []
+  confetti = [],
+  isAnimationRunning = true // Variable to control animation
 
 var particles = 10,
   spread = 40,
@@ -62,6 +63,7 @@ var colorThemes = [
     return colorThemes[random() < 0.5 ? 2 : 4]()
   },
 ]
+
 function color(r, g, b) {
   return "rgb(" + r + "," + g + "," + b + ")"
 }
@@ -74,9 +76,8 @@ function interpolation(a, b, t) {
 // Create a 1D Maximal Poisson Disc over [0, 1]
 var radius = 1 / eccentricity,
   radius2 = radius + radius
+
 function createPoisson() {
-  // domain is the set of points which are still available to pick from
-  // D = union{ [d_i, d_i+1] | i is even }
   var domain = [radius, 1 - radius],
     measure = 1 - radius2,
     spline = [0, 1]
@@ -89,8 +90,6 @@ function createPoisson() {
       b,
       c,
       d
-
-    // Find where dart lies
     for (i = 0, l = domain.length, measure = 0; i < l; i += 2) {
       ;(a = domain[i]), (b = domain[i + 1]), (interval = b - a)
       if (dart < measure + interval) {
@@ -100,29 +99,18 @@ function createPoisson() {
       measure += interval
     }
     ;(c = dart - radius), (d = dart + radius)
-
-    // Update the domain
     for (i = domain.length - 1; i > 0; i -= 2) {
       ;(l = i - 1), (a = domain[l]), (b = domain[i])
-      // c---d          c---d  Do nothing
-      //   c-----d  c-----d    Move interior
-      //   c--------------d    Delete interval
-      //         c--d          Split interval
-      //       a------b
       if (a >= c && a < d)
-        if (b > d) domain[l] = d // Move interior (Left case)
+        if (b > d) domain[l] = d
         else domain.splice(l, 2)
-      // Delete interval
       else if (a < c && b > c)
-        if (b <= d) domain[i] = c // Move interior (Right case)
-        else domain.splice(i, 0, c, d) // Split interval
+        if (b <= d) domain[i] = c
+        else domain.splice(i, 0, c, d)
     }
-
-    // Re-measure the domain
     for (i = 0, l = domain.length, measure = 0; i < l; i += 2)
       measure += domain[i + 1] - domain[i]
   }
-
   return spline.sort()
 }
 
@@ -180,7 +168,6 @@ function Confetto(theme) {
     this.y += this.dy * delta
     this.theta += this.dTheta * delta
 
-    // Compute spline and convert to polar
     var phi = (this.frame % 7777) / 7777,
       i = 0,
       j = 1
@@ -200,23 +187,25 @@ function Confetto(theme) {
 }
 
 function poof() {
+  if (!isAnimationRunning) return // Check if animation should run
+
   if (!frame) {
-    // Append the container
     document.body.appendChild(container)
 
-    // Add confetti
     var theme = colorThemes[0],
       count = 0
     ;(function addConfetto() {
+      if (!isAnimationRunning) return // Check again before adding more confetti
       var confetto = new Confetto(theme)
       confetti.push(confetto)
       container.appendChild(confetto.outer)
       timer = setTimeout(addConfetto, spread * random())
     })(0)
 
-    // Start the loop
     var prev = undefined
     requestAnimationFrame(function loop(timestamp) {
+      if (!isAnimationRunning) return // Stop the animation if it shouldn't run
+
       var delta = prev ? timestamp - prev : 0
       prev = timestamp
       var height = window.innerHeight
@@ -235,4 +224,9 @@ function poof() {
       frame = undefined
     })
   }
+}
+
+// Function to stop the animation
+function stopPoof() {
+  isAnimationRunning = false // Set the control variable to false
 }

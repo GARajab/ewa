@@ -89,9 +89,9 @@ const timeOut = () => {
   const countdownElement = document.getElementById("countdown") // Assume there's an element with the id 'countdown'
 
   let countdownInterval = setInterval(() => {
-    if (countdownStart > 5) {
+    if (countdownStart > 6) {
       countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
-    } else if (countdownStart > 4) {
+    } else if (countdownStart > 2) {
       countdownElement.style.backgroundColor = "#FFC105"
       countdownElement.style.color = "Black"
       countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
@@ -159,27 +159,47 @@ const submitAllPlayerArrows = () => {
       redCards.style.backgroundColor = "#C82333"
       redCardsCounter++
     }
-   
-    }
-  
+  }
+
   let win = false
-  
+
   for (let i = 0; i < 6; i++) {
     const button = document.getElementById(`L${i}`)
     button.setAttribute("disabled", "")
   }
   submitAction.setAttribute("disabled", "")
   scoreLabel.innerText = `Score is: ${scoreCounter}`
-  
-  for (let i = 0; i < 6; i++) {
+
   if (greenCardsCounter > redCardsCounter) {
     // confetti code
     win = true
-    
   }
-  }
-  if(win === true){
-    poof()
+
+  if (win === true) {
+    var duration = 3 * 1000
+    var end = Date.now() + duration
+
+    ;(function frame() {
+      // launch a few confetti from the left edge
+      confetti({
+        particleCount: 7,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+      })
+      // and launch a few from the right edge
+      confetti({
+        particleCount: 7,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+      })
+
+      // keep going until we are out of time
+      if (Date.now() < end) {
+        requestAnimationFrame(frame)
+      }
+    })()
   }
 }
 
@@ -215,4 +235,3 @@ for (let i = 0; i < 6; i++) {
   const button = document.getElementById(`L${i}`)
   button.addEventListener("click", () => changeImageOfPlayer(i))
 }
-
