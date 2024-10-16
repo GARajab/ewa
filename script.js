@@ -2,7 +2,7 @@
 let playerArrowsDirections = []
 let currentIndices = Array(6).fill(0) // Initialize current indices for each image
 let randomArray = [] // Store the PC's random arrows here
-let countdownInterval
+let countdownInterval = 10
 
 const images = [
   "/images/0.png",
@@ -49,7 +49,6 @@ const changeImgForPC = () => {
 
 const initializeGame = () => {
   resetPlayerArrows()
-  clearInterval(countdownInterval)
   startBtn.textContent = "Start"
   startBtn.disabled = false
   if (startBtn.textContent === "Start") {
@@ -57,6 +56,8 @@ const initializeGame = () => {
   }
   countdownElement.textContent =
     "Total Time After The Arrows Disappear is 10 Seconds 😎"
+  countdownElement.style.backgroundColor = "#28A745"
+  clearInterval(countdownInterval)
   for (let i = 0; i < 6; i++) {
     const button = document.getElementById(`L${i}`)
     button.removeAttribute("disabled", "")
@@ -86,9 +87,8 @@ const startGame = () => {
 const timeOut = () => {
   let countdownStart = 10 // Start the countdown from 10 seconds
 
-  const countdownElement = document.getElementById("countdown") // Assume there's an element with the id 'countdown'
-
-  let countdownInterval = setInterval(() => {
+  // Do not redeclare countdownInterval here; use the global one
+  countdownInterval = setInterval(() => {
     if (countdownStart > 6) {
       countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
     } else if (countdownStart > 2) {
@@ -100,19 +100,17 @@ const timeOut = () => {
       countdownElement.style.backgroundColor = "#c82333"
       countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
     }
-
     if (countdownStart === 0) {
-      clearInterval(countdownInterval)
       countdownElement.textContent = "Time's Up!"
       for (let i = 0; i < 6; i++) {
         const button = document.getElementById(`L${i}`)
         button.setAttribute("disabled", "")
       }
       submitAction.setAttribute("disabled", "")
+      // Ensure to clear the interval when time is up
     }
 
     countdownStart--
-    // scoreBonus()
   }, 1000) // Execute every 1000 milliseconds (1 second)
 }
 
@@ -121,7 +119,6 @@ const timeOut = () => {
 
 // Function to reset player arrows
 const resetPlayerArrows = () => {
-  clearInterval(countdownInterval)
   currentIndices.fill(0) // Reset current indices
   cards.forEach((card) => {
     card.classList.add("hide-img")
@@ -148,6 +145,10 @@ let scoreCounter = 0
 let greenCardsCounter = 0
 let redCardsCounter = 0
 const submitAllPlayerArrows = () => {
+  // Clear the countdown interval to stop the timer
+  clearInterval(countdownInterval)
+
+  // The rest of your existing logic goes here
   for (let i = 0; i < 6; i++) {
     if (currentIndices[i] === randomArray[i]) {
       const greenCard = document.getElementById(`cardID${i}`)
@@ -175,7 +176,10 @@ const submitAllPlayerArrows = () => {
     win = true
   }
 
-  if (win === true) {
+  if (win) {
+    startBtn.disabled = true
+    startBtn.textContent = "Finished"
+    startBtn.style.width = "200px"
     var duration = 3 * 1000
     var end = Date.now() + duration
 
