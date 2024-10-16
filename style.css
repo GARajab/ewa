@@ -28,19 +28,20 @@ body {
   font-size: 20px;
   width: fit-content;
 }
-
-#countdown {
-  font-size: 30px;
-  background-color: #28a745;
-  width: fit-content;
-  text-align: center;
-  color: #f4f4f4;
-  padding: 15.8px;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
+#hintBtn {
+  background-color: #22b3d0;
+  padding: 15px 0px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 20px;
+  width: 115px;
+  border: none;
+  cursor: pointer;
 }
 
 .titleAndInst {
@@ -101,6 +102,13 @@ h6 {
 }
 .card.hide-img img {
   opacity: 0; /* Hide the image */
+}
+.hint {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+  /* align-items: ; */
 }
 
 .card img {

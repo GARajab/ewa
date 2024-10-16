@@ -48,44 +48,42 @@ const changeImgForPC = () => {
     }, 1000) // Match this timeout with the duration of the spin CSS animation
   })
 }
-const timeOut = () => {
-  // You must reset countdownStart each time you start it
-  countdownStart = 10
+// const timeOut = () => {
+//   // You must reset countdownStart each time you start it
+//   countdownStart = 10
 
-  // Clear previous interval to prevent multiple intervals running
-  if (countdownInterval) {
-    clearInterval(countdownInterval)
-  }
+//   // Clear previous interval to prevent multiple intervals running
+//   if (countdownInterval) {
+//     clearInterval(countdownInterval)
+//   }
 
-  // Start the countdown interval
-  countdownInterval = setInterval(() => {
-    console.log(`Countdown at ${countdownStart}`) // Debugging line
-    if (!isSubmitted && countdownStart >= 0) {
-      if (countdownStart > 6) {
-        countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
-      } else if (countdownStart > 2) {
-        countdownElement.style.backgroundColor = "#FFC105"
-        countdownElement.style.color = "Black"
-        countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
-      } else if (countdownStart > 0) {
-        countdownElement.style.color = "White"
-        countdownElement.style.backgroundColor = "#c82333"
-        countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
-      } else {
-        countdownElement.textContent = "Time's Up!"
-        clearInterval(countdownInterval) // Clear the interval if time is up
-      }
-      countdownStart-- // Decrease countdown
-    }
-  }, 1000) // Update every second
-}
+//   // Start the countdown interval
+//   countdownInterval = setInterval(() => {
+//     console.log(`Countdown at ${countdownStart}`) // Debugging line
+//     if (!isSubmitted && countdownStart >= 0) {
+//       if (countdownStart > 6) {
+//         countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
+//       } else if (countdownStart > 2) {
+//         countdownElement.style.backgroundColor = "#FFC105"
+//         countdownElement.style.color = "Black"
+//         countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
+//       } else if (countdownStart > 0) {
+//         countdownElement.style.color = "White"
+//         countdownElement.style.backgroundColor = "#c82333"
+//         countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
+//       } else {
+//         countdownElement.textContent = "Time's Up!"
+//         clearInterval(countdownInterval) // Clear the interval if time is up
+//       }
+//       countdownStart-- // Decrease countdown
+//     }
+//   }, 1000) // Update every second
+// }
 
 const initializeGame = () => {
   resetPlayerArrows()
   startBtn.textContent = "Start"
   startBtn.disabled = false
-  countdownElement.textContent =
-    "Total Time After The Arrows Disappear is 10 Seconds 😎"
   countdownElement.style.backgroundColor = "#28A745"
   countdownElement.style.color = "white"
 
@@ -113,7 +111,6 @@ const startGame = () => {
     setTimeout(() => {
       pcArrow.style.transition = "all 1s ease-in-out"
       pcArrow.classList.add("hide-img")
-      timeOut()
     }, 3000)
   })
 
@@ -162,11 +159,16 @@ const submitAllPlayerArrows = () => {
   }
 
   if (win) {
-    startBtn.disabled = true
+    setTimeout(() => {
+      pcArrows.forEach((pcArrow) => {
+        pcArrow.classList.remove("hide-img")
+      })
+    }, 1500)
+    startBtn.disabled = false
     startBtn.textContent = "Finished"
     startBtn.style.width = "200px"
-    var duration = 3 * 1000
-    var end = Date.now() + duration
+    let duration = 3 * 1000
+    let end = Date.now() + duration
 
     ;(function frame() {
       // launch a few confetti from the left edge
@@ -222,6 +224,17 @@ const resetPlayerArrows = () => {
 let scoreCounter = 0
 let greenCardsCounter = 0
 let redCardsCounter = 0
+const showHidePcArrows = () => {
+  pcArrows.forEach((pcArrow) => {
+    if (pcArrow.classList.contains("hide-img")) {
+      pcArrow.style.transition = "all 1s ease-in-out"
+      pcArrow.classList.remove("hide-img")
+    } else {
+      pcArrow.style.transition = "all 1s ease-in-out"
+      pcArrow.classList.add("hide-img")
+    }
+  })
+}
 
 //? cashing
 
@@ -241,6 +254,8 @@ const submitAction = document.getElementById("submitBtm")
 const scoreLabel = document.getElementById("scoreLabel")
 // timr
 const countdownElement = document.getElementById("countdown")
+// hint
+const hintButton = document.getElementById("hintBtn")
 
 // events only (any Thing To Be Clicked Will Be Here)
 
@@ -250,6 +265,8 @@ startBtn.addEventListener("click", startGame)
 rstButton.addEventListener("click", initializeGame)
 // submitBtn
 submitAction.addEventListener("click", submitAllPlayerArrows)
+//
+hintButton.addEventListener("click", showHidePcArrows)
 // Add event listeners for each button
 for (let i = 0; i < 6; i++) {
   const button = document.getElementById(`L${i}`)
