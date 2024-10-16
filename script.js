@@ -2,9 +2,9 @@
 let playerArrowsDirections = []
 let currentIndices = Array(6).fill(0) // Initialize current indices for each image
 let randomArray = [] // Store the PC's random arrows here
-let countdownInterval = 10
+let countdownInterval = null
 let isSubmitted = false
-let countdownStart
+let countdownStart = 10
 
 const images = [
   "/images/0.png",
@@ -48,24 +48,62 @@ const changeImgForPC = () => {
     }, 1000) // Match this timeout with the duration of the spin CSS animation
   })
 }
+const timeOut = () => {
+  // You must reset countdownStart each time you start it
+  countdownStart = 10
+
+  // Clear previous interval to prevent multiple intervals running
+  if (countdownInterval) {
+    clearInterval(countdownInterval)
+  }
+
+  // Start the countdown interval
+  countdownInterval = setInterval(() => {
+    console.log(`Countdown at ${countdownStart}`) // Debugging line
+    if (!isSubmitted && countdownStart >= 0) {
+      if (countdownStart > 6) {
+        countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
+      } else if (countdownStart > 2) {
+        countdownElement.style.backgroundColor = "#FFC105"
+        countdownElement.style.color = "Black"
+        countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
+      } else if (countdownStart > 0) {
+        countdownElement.style.color = "White"
+        countdownElement.style.backgroundColor = "#c82333"
+        countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
+      } else {
+        countdownElement.textContent = "Time's Up!"
+        clearInterval(countdownInterval) // Clear the interval if time is up
+      }
+      countdownStart-- // Decrease countdown
+    }
+  }, 1000) // Update every second
+}
 
 const initializeGame = () => {
   resetPlayerArrows()
   startBtn.textContent = "Start"
   startBtn.disabled = false
-  if (startBtn.textContent === "Start") {
-    startBtn.style.width = "100px"
-  }
   countdownElement.textContent =
     "Total Time After The Arrows Disappear is 10 Seconds 😎"
   countdownElement.style.backgroundColor = "#28A745"
   countdownElement.style.color = "white"
+
   for (let i = 0; i < 6; i++) {
     const button = document.getElementById(`L${i}`)
-    button.removeAttribute("disabled", "")
+    if (button) {
+      button.removeAttribute("disabled")
+    }
   }
-  submitAction.removeAttribute("disabled", "")
+  submitAction.removeAttribute("disabled")
+
+  // Start the countdown
+  isSubmitted = false // Reset submission status
+  // Start the countdown timer
 }
+
+// Handling Reset Button
+// rstButton.addEventListener("click", initializeGame); // Ensure initializeGame correctly sets up the game
 // Start game function
 const startGame = () => {
   // setTimeout(() => {
@@ -89,39 +127,6 @@ const startGame = () => {
   startBtn.disabled = true
   startBtn.textContent = "Started..."
   startBtn.style.width = "200px"
-}
-
-const timeOut = () => {
-  let countdownStart = 10 // Start the countdown from 10 seconds
-
-  // Do not redeclare countdownInterval here; use the global one
-  countdownInterval = setInterval(() => {
-    if (isSubmitted === false) {
-      if (countdownStart > 6) {
-        countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
-      } else if (countdownStart > 2) {
-        countdownElement.style.backgroundColor = "#FFC105"
-        countdownElement.style.color = "Black"
-        countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
-      } else if (countdownStart > 0) {
-        countdownElement.style.color = "White"
-        countdownElement.style.backgroundColor = "#c82333"
-        countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
-      }
-    } else {
-      // if (countdownStart === 0) {
-      //   countdownElement.textContent = "Time's Up!"
-      // } else {
-      //   for (let i = 0; i < 6; i++) {
-      //     const button = document.getElementById(`L${i}`)
-      //     button.setAttribute("disabled", "")
-      //   }
-      //   submitAction.setAttribute("disabled", "")
-      //   // Ensure to clear the interval when time is up
-      // }
-    }
-    countdownStart--
-  }, 1000) // Execute every 1000 milliseconds (1 second)
 }
 
 const submitAllPlayerArrows = () => {
