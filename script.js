@@ -3,6 +3,8 @@ let playerArrowsDirections = []
 let currentIndices = Array(6).fill(0) // Initialize current indices for each image
 let randomArray = [] // Store the PC's random arrows here
 let countdownInterval = 10
+let isSubmitted = false
+let countdownStart
 
 const images = [
   "/images/0.png",
@@ -57,7 +59,7 @@ const initializeGame = () => {
   countdownElement.textContent =
     "Total Time After The Arrows Disappear is 10 Seconds 😎"
   countdownElement.style.backgroundColor = "#28A745"
-  clearInterval(countdownInterval)
+  countdownElement.style.color = "white"
   for (let i = 0; i < 6; i++) {
     const button = document.getElementById(`L${i}`)
     button.removeAttribute("disabled", "")
@@ -79,6 +81,11 @@ const startGame = () => {
 
   // Generate and show PC directions
   changeImgForPC()
+  for (let i = 0; i < 6; i++) {
+    const button = document.getElementById(`L${i}`)
+    button.removeAttribute("disabled", "")
+  }
+  submitAction.removeAttribute("disabled", "")
   startBtn.disabled = true
   startBtn.textContent = "Started..."
   startBtn.style.width = "200px"
@@ -89,64 +96,37 @@ const timeOut = () => {
 
   // Do not redeclare countdownInterval here; use the global one
   countdownInterval = setInterval(() => {
-    if (countdownStart > 6) {
-      countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
-    } else if (countdownStart > 2) {
-      countdownElement.style.backgroundColor = "#FFC105"
-      countdownElement.style.color = "Black"
-      countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
-    } else if (countdownStart > 0) {
-      countdownElement.style.color = "White"
-      countdownElement.style.backgroundColor = "#c82333"
-      countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
-    }
-    if (countdownStart === 0) {
-      countdownElement.textContent = "Time's Up!"
-      for (let i = 0; i < 6; i++) {
-        const button = document.getElementById(`L${i}`)
-        button.setAttribute("disabled", "")
+    if (isSubmitted === false) {
+      if (countdownStart > 6) {
+        countdownElement.textContent = `Total Time After The Arrows Disappear is ${countdownStart} Seconds 😎`
+      } else if (countdownStart > 2) {
+        countdownElement.style.backgroundColor = "#FFC105"
+        countdownElement.style.color = "Black"
+        countdownElement.textContent = `Time Become ${countdownStart} Hurry Up 🤯`
+      } else if (countdownStart > 0) {
+        countdownElement.style.color = "White"
+        countdownElement.style.backgroundColor = "#c82333"
+        countdownElement.textContent = `Only ${countdownStart} Seconds Remains 😡`
       }
-      submitAction.setAttribute("disabled", "")
-      // Ensure to clear the interval when time is up
+    } else {
+      // if (countdownStart === 0) {
+      //   countdownElement.textContent = "Time's Up!"
+      // } else {
+      //   for (let i = 0; i < 6; i++) {
+      //     const button = document.getElementById(`L${i}`)
+      //     button.setAttribute("disabled", "")
+      //   }
+      //   submitAction.setAttribute("disabled", "")
+      //   // Ensure to clear the interval when time is up
+      // }
     }
-
     countdownStart--
   }, 1000) // Execute every 1000 milliseconds (1 second)
 }
 
-// To start the countdown, you can call the timeOut function:
-// timeOut();
-
-// Function to reset player arrows
-const resetPlayerArrows = () => {
-  currentIndices.fill(0) // Reset current indices
-  cards.forEach((card) => {
-    card.classList.add("hide-img")
-    setTimeout(() => {
-      for (let i = 0; i < 6; i++) {
-        const img = document.getElementById(`plrImg${i}`)
-        img.src = images[0]
-      }
-      card.classList.remove("hide-img")
-    }, 1500) // Wait for 3 seconds before removing the class
-    card.style.backgroundColor = "white"
-  })
-
-  pcArrows.forEach((pcArrow) => {
-    pcArrow.classList.add("hide-img")
-  })
-  for (let i = 0; i < 6; i++) {
-    const button = document.getElementById(`L${i}`)
-    button.removeAttribute("disabled", "")
-  }
-  submitAction.removeAttribute("disabled", "")
-}
-let scoreCounter = 0
-let greenCardsCounter = 0
-let redCardsCounter = 0
 const submitAllPlayerArrows = () => {
   // Clear the countdown interval to stop the timer
-  clearInterval(countdownInterval)
+  isSubmitted = true
 
   // The rest of your existing logic goes here
   for (let i = 0; i < 6; i++) {
@@ -206,6 +186,37 @@ const submitAllPlayerArrows = () => {
     })()
   }
 }
+
+// To start the countdown, you can call the timeOut function:
+// timeOut();
+
+// Function to reset player arrows
+const resetPlayerArrows = () => {
+  currentIndices.fill(0) // Reset current indices
+  cards.forEach((card) => {
+    card.classList.add("hide-img")
+    setTimeout(() => {
+      for (let i = 0; i < 6; i++) {
+        const img = document.getElementById(`plrImg${i}`)
+        img.src = images[0]
+      }
+      card.classList.remove("hide-img")
+    }, 1500) // Wait for 3 seconds before removing the class
+    card.style.backgroundColor = "white"
+  })
+
+  pcArrows.forEach((pcArrow) => {
+    pcArrow.classList.add("hide-img")
+  })
+  // for (let i = 0; i < 6; i++) {
+  //   const button = document.getElementById(`L${i}`)
+  //   button.removeAttribute("disabled", "")
+  // }
+  // submitAction.removeAttribute("disabled", "")
+}
+let scoreCounter = 0
+let greenCardsCounter = 0
+let redCardsCounter = 0
 
 //? cashing
 
